@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// import 'package:social_app/ui/auth/signup.dart';
 import 'package:social_app/ui/onboarding/onboarding.dart';
 import 'package:social_app/ui/splash_screen/splash_screen.dart';
 

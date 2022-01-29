@@ -4,9 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:social_app/widgets/navigation/back.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  final String email;
+  const SignUp({Key? key, required this.email}) : super(key: key);
 
   @override
   _SignUpState createState() => _SignUpState();
@@ -37,9 +36,9 @@ class _SignUpState extends State<SignUp> {
                       text: 'Using  ',
                       style: GoogleFonts.lato(color: Colors.green),
                       children: <TextSpan>[
-                        const TextSpan(
-                            text: 'widget.email',
-                            style: TextStyle(
+                        TextSpan(
+                            text: widget.email,
+                            style: const TextStyle(
                                 color: Colors.white70,
                                 fontWeight: FontWeight.bold)),
                         TextSpan(
