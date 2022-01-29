@@ -14,7 +14,6 @@ class EmailAddress extends StatefulWidget {
 
 class _EmailAddressState extends State<EmailAddress> {
   final TextEditingController _emailController = TextEditingController();
-  bool obscureText = false;
 
   @override
   Widget build(BuildContext context) {
