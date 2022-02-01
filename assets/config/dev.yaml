@@ -1,0 +1,8 @@
+server:
+  user:
+    # baseUrl: 0.0.0.1:9000
+    baseUrl: www.google.com
+    # baseUrl: http://192.168.8.144:90
+  post:
+    baseUrl: 0.0.0.0:93
+    # baseUrl: http://192.168.8.144:93

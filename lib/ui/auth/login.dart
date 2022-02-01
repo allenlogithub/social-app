@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:social_app/config/config.dart';
+import 'package:social_app/network/auth/signup.dart';
+
 class Login extends StatefulWidget {
   final String name;
   final String account;
@@ -24,6 +27,9 @@ class _LoginState extends State<Login> {
     print(widget.account);
     print(widget.password);
     print(widget.passwordAgain);
+    // print(server_domain);
+    // RegisterRequest();
+    appCfg();
     return Container();
   }
 }
