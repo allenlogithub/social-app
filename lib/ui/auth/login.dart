@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:social_app/widgets/navigation/back.dart';
+import 'package:social_app/network/auth/login.dart';
 
 class Login extends StatefulWidget {
   final String account;
@@ -64,6 +65,38 @@ class _LoginState extends State<Login> {
                         autocorrect: true,
                         decoration: const InputDecoration(hintText: 'PASSWORD'),
                       )),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 60,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Future<LoginResponse> result = LoginRequest(
+                            widget.account, _passwordController.text);
+                        result.then((value) {
+                          print("value.message: " + value.message.toString());
+                        });
+                      },
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.amber),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      side: const BorderSide(
+                                          color: Colors.amber)))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.account_box_rounded,
+                              color: Colors.white),
+                          Text('   Login',
+                              style: GoogleFonts.lato(
+                                  fontSize: 20, color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
