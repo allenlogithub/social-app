@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:social_app/widgets/navigation/back.dart';
+
 class Login extends StatefulWidget {
   final String account;
   const Login({Key? key, required this.account}) : super(key: key);
@@ -23,13 +25,14 @@ class _LoginState extends State<Login> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 80),
+                  const NavigationBack(),
+                  const SizedBox(height: 20),
                   Text("Login",
                       style: GoogleFonts.lato(
                           color: Colors.white,
                           fontSize: 35,
                           fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 10),
                   RichText(
                     text: TextSpan(
                       text: 'Using  ',

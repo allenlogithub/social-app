@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:social_app/widgets/navigation/back.dart';
 import 'package:social_app/ui/auth/signup.dart';
+import 'package:social_app/ui/auth/login.dart';
 
 class EmailAddress extends StatefulWidget {
   const EmailAddress({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _EmailAddressState extends State<EmailAddress> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const NavigationBack(),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 30),
                   Text("What's your\nemail\naddress?",
                       style: GoogleFonts.lato(
                           color: Colors.white,
@@ -43,6 +44,35 @@ class _EmailAddressState extends State<EmailAddress> {
                         decoration:
                             const InputDecoration(hintText: 'Enter Email Here'),
                       )),
+                  const SizedBox(height: 14),
+                  SizedBox(
+                    height: 60,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => Login(account: _emailController.text));
+                      },
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.amber),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      side: const BorderSide(
+                                          color: Colors.amber)))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.account_box_rounded,
+                              color: Colors.white),
+                          Text('   Login',
+                              style: GoogleFonts.lato(
+                                  fontSize: 20, color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   SizedBox(
                     height: 60,
                     child: ElevatedButton(
@@ -62,7 +92,7 @@ class _EmailAddressState extends State<EmailAddress> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(Icons.email, color: Colors.white),
-                          Text('   Continue with Email',
+                          Text('   Sign Up with Email',
                               style: GoogleFonts.lato(
                                   fontSize: 20, color: Colors.white)),
                         ],
