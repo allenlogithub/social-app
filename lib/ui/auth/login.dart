@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// import 'package:social_app/network/auth/signup.dart';
-
 class Login extends StatefulWidget {
-  const Login({
-    Key? key,
-  }) : super(key: key);
+  final String account;
+  const Login({Key? key, required this.account}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  final TextEditingController _accountController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -27,18 +23,31 @@ class _LoginState extends State<Login> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Your Account",
+                  const SizedBox(height: 80),
+                  Text("Login",
                       style: GoogleFonts.lato(
-                          color: Colors.white70,
-                          fontSize: 10,
+                          color: Colors.white,
+                          fontSize: 35,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(
-                      width: 280,
-                      child: TextField(
-                        controller: _accountController,
-                        autocorrect: true,
-                        decoration: const InputDecoration(hintText: 'ACCOUNT'),
-                      )),
+                  const SizedBox(height: 40),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Using  ',
+                      style: GoogleFonts.lato(color: Colors.green),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: widget.account,
+                          style: GoogleFonts.lato(
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        TextSpan(
+                            text: "  to login.",
+                            style: GoogleFonts.lato(color: Colors.green)),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Text("Your Password",
                       style: GoogleFonts.lato(

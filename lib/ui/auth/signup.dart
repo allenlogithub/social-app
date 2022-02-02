@@ -109,7 +109,7 @@ class _SignUpState extends State<SignUp> {
                             _passwordAgainController.text);
                         result.then((value) {
                           if (value.err == "") {
-                            Get.to(() => Login());
+                            Get.to(() => Login(account: widget.email));
                           } else {
                             print("value.err: " + value.err.toString());
                             print("value.message: " + value.message.toString());
