@@ -19,14 +19,6 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordAgainController =
       TextEditingController();
-  // late Future<RegisterResponse> Register;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Register = RegisterRequest(_nameController.text, widget.email,
-  //       _passwordController.text, _passwordAgainController.text);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,43 +98,9 @@ class _SignUpState extends State<SignUp> {
                             const InputDecoration(hintText: 'PASSWORD AGAIN'),
                       )),
                   const SizedBox(height: 20),
-                  // FutureBuilder<RegisterResponse>(
-                  //     future: Register,
-                  //     builder: (context, snapshot) {
-                  //       if (snapshot.hasData) {
-                  //         return Text(snapshot.data!.message);
-                  //       } else if (snapshot.hasError) {
-                  //         return Text('${snapshot.error}');
-                  //       }
-
-                  //       // By default, show a loading spinner.
-                  //       return const CircularProgressIndicator();
-                  //     }),
                   SizedBox(
                     height: 60,
                     child: ElevatedButton(
-                      // onPressed: () {
-                      //   Get.to(() => Login(
-                      //         name: _nameController.text,
-                      //         account: widget.email,
-                      //         password: _passwordController.text,
-                      //         passwordAgain: _passwordAgainController.text,
-                      //       ));
-                      // },
-                      // onPressed: () {
-                      //   FutureBuilder<RegisterResponse>(
-                      //       future: Register,
-                      //       builder: (context, snapshot) {
-                      //         if (snapshot.hasData) {
-                      //           return Text(snapshot.data!.message);
-                      //         } else if (snapshot.hasError) {
-                      //           return Text('${snapshot.error}');
-                      //         }
-
-                      //         // By default, show a loading spinner.
-                      //         return const CircularProgressIndicator();
-                      //       });
-                      // },
                       onPressed: () {
                         Future<RegisterResponse> result = RegisterRequest(
                             _nameController.text,
@@ -151,8 +109,7 @@ class _SignUpState extends State<SignUp> {
                             _passwordAgainController.text);
                         result.then((value) {
                           if (value.err == "") {
-                            print("registerSuccess");
-                            print(value.message["success"]);
+                            Get.to(() => Login());
                           } else {
                             print("value.err: " + value.err.toString());
                             print("value.message: " + value.message.toString());
