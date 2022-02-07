@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 import 'package:social_app/widgets/navigation/back.dart';
 import 'package:social_app/network/auth/login.dart';
+import 'package:social_app/ui/self_post/self_post.dart';
 
 class Login extends StatefulWidget {
   final String account;
@@ -73,7 +75,12 @@ class _LoginState extends State<Login> {
                         Future<LoginResponse> result = LoginRequest(
                             widget.account, _passwordController.text);
                         result.then((value) {
-                          print("value.message: " + value.message.toString());
+                          if (value.err == "") {
+                            Get.to(() => const SelfArticlePost());
+                          } else {
+                            print("value.err: " + value.err.toString());
+                            print("value.message: " + value.message.toString());
+                          }
                         });
                       },
                       style: ButtonStyle(
