@@ -16,11 +16,11 @@ class GetSelfArticleResponse {
   factory GetSelfArticleResponse.fromJson(Map<String, dynamic> json) =>
       GetSelfArticleResponse(
         err: json["err"] ?? "",
-        message: json["message"],
+        message: json["message"]["items"],
       );
 }
 
-Future<GetSelfArticleResponse> GetSelfArticleRequest() async {
+Future<GetSelfArticleResponse> getSelfArticleRequest() async {
   Response response;
   var options = BaseOptions(
     baseUrl: server_domain['post'],
