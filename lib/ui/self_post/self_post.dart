@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 import 'package:social_app/network/article/get_self_article_post.dart';
+import 'package:social_app/network/article/post_self_article.dart';
 
 class SelfArticlePost extends StatefulWidget {
   const SelfArticlePost({Key? key}) : super(key: key);
@@ -14,11 +16,27 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
   late Future<GetSelfArticleResponse> futureGetSelfArticleResponse;
   final TextEditingController _newSelfArticleContent = TextEditingController();
   var dropdownValue;
+  late bool _isPostButtonEnabled;
 
   @override
   void initState() {
     super.initState();
+    _isPostButtonEnabled = false;
     futureGetSelfArticleResponse = getSelfArticleRequest();
+  }
+
+  bool _postButtonDisableController() {
+    if (dropdownValue != null && _newSelfArticleContent.text != "") {
+      setState(() {
+        _isPostButtonEnabled = true;
+      });
+    } else {
+      setState(() {
+        _isPostButtonEnabled = false;
+      });
+    }
+
+    return _isPostButtonEnabled;
   }
 
   @override
@@ -64,6 +82,8 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                     ),
+                                    onChanged: (value) =>
+                                        _postButtonDisableController(),
                                   ),
                                 ),
                               ),
@@ -90,6 +110,7 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                     onChanged: (String? newValue) {
                                       setState(() {
                                         dropdownValue = newValue!;
+                                        _postButtonDisableController();
                                       });
                                     },
                                     hint: const Text("Scope"),
@@ -107,15 +128,31 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                               Expanded(
                                   child: Center(
                                 child: ElevatedButton(
-                                    onPressed: () {
-                                      // Future<SelfArticlePostResponse> post = SelfArticlePostRequest(
-
-                                      // ),
-                                    },
+                                    onPressed: _isPostButtonEnabled
+                                        ? () {
+                                            if (_isPostButtonEnabled) {
+                                              Future<PostSelfArticleResponse>
+                                                  result =
+                                                  postSelfArticleRequest(
+                                                      dropdownValue,
+                                                      _newSelfArticleContent
+                                                          .text);
+                                              result.then((then) {
+                                                // Get.to(() => SelfArticlePost());
+                                                setState(() {
+                                                  futureGetSelfArticleResponse =
+                                                      getSelfArticleRequest();
+                                                });
+                                              });
+                                            }
+                                          }
+                                        : null,
                                     style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
-                                              Colors.amber),
+                                              _isPostButtonEnabled == true
+                                                  ? Colors.amber
+                                                  : Colors.grey),
                                       shape: MaterialStateProperty.all<
                                           RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
@@ -123,6 +160,7 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                               BorderRadius.circular(50.0),
                                           side: const BorderSide(
                                             color: Colors.amber,
+                                            width: 2.0,
                                           ),
                                         ),
                                       ),
