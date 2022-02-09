@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import 'package:social_app/network/article/get_self_article_post.dart';
 import 'package:social_app/network/article/post_self_article.dart';
+import 'package:social_app/widgets/self_post/commentTextField.dart';
+import 'package:social_app/widgets/self_post/commentShowing.dart';
 
 class SelfArticlePost extends StatefulWidget {
   const SelfArticlePost({Key? key}) : super(key: key);
@@ -213,39 +215,23 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                           showDialog(
                                               context: context,
                                               builder: (context) {
-                                                return Dialog();
+                                                return const Dialog(
+                                                  elevation: 1,
+                                                  backgroundColor:
+                                                      Color(0xFF303030),
+                                                  child: CommentTextInput(),
+                                                );
                                               });
                                         } else {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
                                               return Dialog(
-                                                // shape: RoundedRectangleBorder(
-                                                //     borderRadius:
-                                                //         BorderRadius.circular(
-                                                //             40)),
                                                 elevation: 16,
-                                                child: Container(
-                                                  child: ListView.builder(
-                                                      itemCount:
-                                                          art['items'].length,
-                                                      // physics: ClampingScrollPhysics(),
-                                                      shrinkWrap: true,
-                                                      itemBuilder:
-                                                          (context, cmtIndex) {
-                                                        final cmt = art['items']
-                                                            [cmtIndex];
-                                                        return Card(
-                                                            child: Column(
-                                                          children: <Widget>[
-                                                            Text(cmt[
-                                                                'userName']),
-                                                            Text(
-                                                                cmt['comment']),
-                                                          ],
-                                                        ));
-                                                      }),
-                                                ),
+                                                backgroundColor:
+                                                    const Color(0xFF303030),
+                                                child: CommentShowing(
+                                                    article: art),
                                               );
                                             },
                                           );
