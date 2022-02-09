@@ -215,11 +215,13 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                           showDialog(
                                               context: context,
                                               builder: (context) {
-                                                return const Dialog(
+                                                return Dialog(
                                                   elevation: 1,
                                                   backgroundColor:
-                                                      Color(0xFF303030),
-                                                  child: CommentTextInput(),
+                                                      const Color(0xFF303030),
+                                                  child: CommentTextInput(
+                                                    articleId: art['articleId'],
+                                                  ),
                                                 );
                                               });
                                         } else {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:social_app/widgets/self_post/commentTextField.dart';
+
 class CommentShowing extends StatefulWidget {
   final dynamic article;
   const CommentShowing({
@@ -15,45 +17,52 @@ class CommentShowing extends StatefulWidget {
 class _CommentShowingState extends State<CommentShowing> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: widget.article['items'].length,
-        // physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, cmtIndex) {
-          final cmt = widget.article['items'][cmtIndex];
-          return Card(
-            child: Row(
-              children: <Widget>[
-                const Icon(
-                  Icons.account_box_rounded,
-                  color: Colors.white,
-                  size: 50.0,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      children: <Widget>[
+        ListView.builder(
+            itemCount: widget.article['items'].length,
+            // physics: ClampingScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, cmtIndex) {
+              final cmt = widget.article['items'][cmtIndex];
+              return Card(
+                child: Row(
                   children: <Widget>[
-                    Text(
-                      cmt['userName'],
-                      style: GoogleFonts.lato(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    const Icon(
+                      Icons.account_box_rounded,
+                      color: Colors.white,
+                      size: 50.0,
                     ),
-                    Text(cmt['comment'],
-                        style: GoogleFonts.lato(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        )),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          cmt['userName'],
+                          style: GoogleFonts.lato(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(cmt['comment'],
+                            style: GoogleFonts.lato(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-          );
-        });
+                ),
+              );
+            }),
+        Expanded(
+          child: CommentTextInput(articleId: widget.article['articleId']),
+        )
+      ],
+    );
   }
 }

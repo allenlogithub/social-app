@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:social_app/network/comment/post_comment.dart';
+
 class CommentTextInput extends StatefulWidget {
-  const CommentTextInput({Key? key}) : super(key: key);
+  final int articleId;
+  const CommentTextInput({
+    Key? key,
+    required this.articleId,
+  }) : super(key: key);
 
   @override
   _CommentTextInputState createState() => _CommentTextInputState();
@@ -34,52 +40,48 @@ class _CommentTextInputState extends State<CommentTextInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(),
-      child: IntrinsicHeight(
-        child: Column(
-          children: <Widget>[
-            Text(
-              'Comment',
-              style: GoogleFonts.lato(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const Expanded(
+          child: Material(
+            color: Colors.transparent,
+          ),
+        ),
+        Container(
+          color: Colors.grey[700],
+          padding: const EdgeInsets.all(0.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(
+                width: 10,
               ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: TextField(
-                    maxLines: 8,
-                    decoration: const InputDecoration.collapsed(
-                        hintText: "Add a comment..."),
-                    controller: cmtContent,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                    onChanged: (value) => _postButtonController(),
+              Expanded(
+                child: TextField(
+                  maxLines: 2,
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: const InputDecoration.collapsed(
+                      hintText: "Add a comment..."),
+                  controller: cmtContent,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
+                  onChanged: (value) => _postButtonController(),
                 ),
-                const SizedBox(
-                  width: 10,
-                )
-              ],
-            ),
-            SizedBox(
-              width: 100,
-              height: 35,
-              child: ElevatedButton(
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
                   onPressed: _isPostButtonEnabled
                       ? () {
                           if (_isPostButtonEnabled) {
-                            print(cmtContent);
+                            postCommentRequest(
+                                cmtContent.text, widget.articleId);
                           }
                         }
                       : null,
@@ -100,23 +102,21 @@ class _CommentTextInputState extends State<CommentTextInput> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Post',
-                        style: GoogleFonts.lato(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
+                    children: const [
+                      Icon(
+                        Icons.send,
+                        color: Colors.white,
+                        size: 24.0,
                       ),
                     ],
                   )),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-          ],
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
