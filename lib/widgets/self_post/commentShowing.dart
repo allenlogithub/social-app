@@ -21,7 +21,7 @@ class _CommentShowingState extends State<CommentShowing> {
       children: <Widget>[
         ListView.builder(
             itemCount: widget.article['items'].length,
-            // physics: ClampingScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, cmtIndex) {
               final cmt = widget.article['items'][cmtIndex];
@@ -59,9 +59,6 @@ class _CommentShowingState extends State<CommentShowing> {
                 ),
               );
             }),
-        Expanded(
-          child: CommentTextInput(articleId: widget.article['articleId']),
-        )
       ],
     );
   }

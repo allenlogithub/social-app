@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import 'package:social_app/network/article/get_self_article_post.dart';
 import 'package:social_app/network/article/post_self_article.dart';
+import 'package:social_app/ui/post/article.dart';
+import 'package:social_app/widgets/navigation/back.dart';
 import 'package:social_app/widgets/self_post/commentTextField.dart';
 import 'package:social_app/widgets/self_post/commentShowing.dart';
 
@@ -211,33 +213,9 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                   const Spacer(),
                                   ElevatedButton(
                                       onPressed: () {
-                                        if (art['items'] == null) {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return Dialog(
-                                                  elevation: 1,
-                                                  backgroundColor:
-                                                      const Color(0xFF303030),
-                                                  child: CommentTextInput(
-                                                    articleId: art['articleId'],
-                                                  ),
-                                                );
-                                              });
-                                        } else {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return Dialog(
-                                                elevation: 16,
-                                                backgroundColor:
-                                                    const Color(0xFF303030),
-                                                child: CommentShowing(
-                                                    article: art),
-                                              );
-                                            },
-                                          );
-                                        }
+                                        Get.to(() => Article(
+                                              article: art,
+                                            ));
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:

@@ -44,11 +44,6 @@ class _CommentTextInputState extends State<CommentTextInput> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        const Expanded(
-          child: Material(
-            color: Colors.transparent,
-          ),
-        ),
         Container(
           color: Colors.grey[700],
           padding: const EdgeInsets.all(0.0),
