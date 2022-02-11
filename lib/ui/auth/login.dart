@@ -20,15 +20,28 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const <Widget>[
+            SizedBox(
+              height: 40,
+              width: 40,
+              child: NavigationBack(),
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(20.0),
             child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const NavigationBack(),
                   const SizedBox(height: 20),
                   Text("Login",
                       style: GoogleFonts.lato(
