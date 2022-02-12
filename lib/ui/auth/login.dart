@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
                             widget.account, _passwordController.text);
                         result.then((value) {
                           if (value.err == "") {
-                            Get.to(() => const SelfArticlePost());
+                            Get.to(() => SelfArticlePost());
                           } else {
                             print("value.err: " + value.err.toString());
                             print("value.message: " + value.message.toString());

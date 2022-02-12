@@ -6,10 +6,14 @@ import 'package:social_app/widgets/self_post/commentTextField.dart';
 import 'package:social_app/widgets/navigation/back.dart';
 
 class Article extends StatefulWidget {
+  final Function(int index, dynamic comments) notifyCommentsUpdated;
   final dynamic article;
+  final int index;
   const Article({
     Key? key,
+    required this.notifyCommentsUpdated,
     required this.article,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -54,10 +58,18 @@ class _ArticleState extends State<Article> {
             ),
             if (widget.article['items'] != null) ...[
               CommentShowing(article: widget.article),
-              CommentTextInput(articleId: widget.article['articleId']),
+              CommentTextInput(
+                articleId: widget.article['articleId'],
+                index: widget.index,
+                notifyCommentsUpdated: widget.notifyCommentsUpdated,
+              ),
             ] else ...[
-              CommentTextInput(articleId: widget.article['articleId']),
-            ]
+              CommentTextInput(
+                articleId: widget.article['articleId'],
+                index: widget.index,
+                notifyCommentsUpdated: widget.notifyCommentsUpdated,
+              ),
+            ],
           ],
         ),
       ),

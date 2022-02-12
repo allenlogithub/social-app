@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:social_app/network/article/get_self_article_post.dart';
 import 'package:social_app/network/article/post_self_article.dart';
 import 'package:social_app/ui/post/article.dart';
-import 'package:social_app/widgets/navigation/back.dart';
 import 'package:social_app/widgets/self_post/commentTextField.dart';
-import 'package:social_app/widgets/self_post/commentShowing.dart';
 
 class SelfArticlePost extends StatefulWidget {
-  const SelfArticlePost({Key? key}) : super(key: key);
+  const SelfArticlePost({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _SelfArticlePostState createState() => _SelfArticlePostState();
@@ -27,6 +27,14 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
     super.initState();
     _isPostButtonEnabled = false;
     futureGetSelfArticleResponse = getSelfArticleRequest();
+  }
+
+  void updateComments(int index, dynamic comments) {
+    setState(() {
+      futureGetSelfArticleResponse.then((value) {
+        value.message[index]['items'] = comments;
+      });
+    });
   }
 
   bool _postButtonDisableController() {
@@ -134,7 +142,6 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                                 dropdownValue,
                                                 _newSelfArticleContent.text);
                                         result.then((then) {
-                                          // Get.to(() => SelfArticlePost());
                                           setState(() {
                                             futureGetSelfArticleResponse =
                                                 getSelfArticleRequest();
@@ -214,7 +221,10 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                   ElevatedButton(
                                       onPressed: () {
                                         Get.to(() => Article(
+                                              notifyCommentsUpdated:
+                                                  updateComments,
                                               article: art,
+                                              index: index,
                                             ));
                                       },
                                       style: ButtonStyle(
@@ -255,7 +265,12 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                           );
                         });
                   }),
-            ))
+            )),
+            CommentTextInput(
+              notifyCommentsUpdated: updateComments,
+              articleId: -1,
+              index: -1,
+            ),
           ],
         ),
       ),

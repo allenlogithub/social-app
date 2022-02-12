@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:social_app/widgets/self_post/commentTextField.dart';
-
 class CommentShowing extends StatefulWidget {
   final dynamic article;
   const CommentShowing({

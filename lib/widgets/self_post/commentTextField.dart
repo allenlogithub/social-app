@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:social_app/network/comment/post_comment.dart';
+import 'package:social_app/network/comment/get_comment.dart';
 
 class CommentTextInput extends StatefulWidget {
+  final Function(int index, dynamic comments) notifyCommentsUpdated;
   final int articleId;
+  final int index;
   const CommentTextInput({
     Key? key,
+    required this.notifyCommentsUpdated,
     required this.articleId,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -17,6 +21,7 @@ class CommentTextInput extends StatefulWidget {
 class _CommentTextInputState extends State<CommentTextInput> {
   final TextEditingController cmtContent = TextEditingController();
   late bool _isPostButtonEnabled;
+  late Future<GetCommentResponse> futureGetCommentResponse;
 
   @override
   void initState() {
@@ -73,10 +78,16 @@ class _CommentTextInputState extends State<CommentTextInput> {
               ),
               ElevatedButton(
                   onPressed: _isPostButtonEnabled
-                      ? () {
+                      ? () async {
                           if (_isPostButtonEnabled) {
-                            postCommentRequest(
+                            await postCommentRequest(
                                 cmtContent.text, widget.articleId);
+                            futureGetCommentResponse =
+                                getCommentRequest(widget.articleId);
+                            futureGetCommentResponse.then((value) {
+                              widget.notifyCommentsUpdated(
+                                  widget.index, value.message['items']);
+                            });
                           }
                         }
                       : null,
