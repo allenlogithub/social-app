@@ -270,6 +270,7 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
               notifyCommentsUpdated: updateComments,
               articleId: -1,
               index: -1,
+              refresh: (bool refresh) {},
             ),
           ],
         ),

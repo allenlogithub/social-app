@@ -5,11 +5,13 @@ import 'package:social_app/network/comment/get_comment.dart';
 
 class CommentTextInput extends StatefulWidget {
   final Function(int index, dynamic comments) notifyCommentsUpdated;
+  final Function(bool refresh) refresh;
   final int articleId;
   final int index;
   const CommentTextInput({
     Key? key,
     required this.notifyCommentsUpdated,
+    required this.refresh,
     required this.articleId,
     required this.index,
   }) : super(key: key);
@@ -87,6 +89,7 @@ class _CommentTextInputState extends State<CommentTextInput> {
                             futureGetCommentResponse.then((value) {
                               widget.notifyCommentsUpdated(
                                   widget.index, value.message['items']);
+                              widget.refresh(true);
                             });
                           }
                         }

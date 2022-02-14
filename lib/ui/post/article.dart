@@ -21,6 +21,22 @@ class Article extends StatefulWidget {
 }
 
 class _ArticleState extends State<Article> {
+  dynamic art;
+
+  @override
+  void initState() {
+    super.initState();
+    art = widget.article;
+  }
+
+  void refreshScreen(bool refresh) {
+    if (refresh) {
+      setState(() {
+        art = widget.article;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +62,7 @@ class _ArticleState extends State<Article> {
               height: 20,
             ),
             Text(
-              widget.article['content'],
+              art['content'],
               style: GoogleFonts.lato(
                 color: Colors.white,
                 fontSize: 35,
@@ -56,18 +72,20 @@ class _ArticleState extends State<Article> {
             const SizedBox(
               height: 10,
             ),
-            if (widget.article['items'] != null) ...[
-              CommentShowing(article: widget.article),
+            if (art['items'] != null) ...[
+              CommentShowing(article: art),
               CommentTextInput(
-                articleId: widget.article['articleId'],
+                articleId: art['articleId'],
                 index: widget.index,
                 notifyCommentsUpdated: widget.notifyCommentsUpdated,
+                refresh: refreshScreen,
               ),
             ] else ...[
               CommentTextInput(
-                articleId: widget.article['articleId'],
+                articleId: art['articleId'],
                 index: widget.index,
                 notifyCommentsUpdated: widget.notifyCommentsUpdated,
+                refresh: refreshScreen,
               ),
             ],
           ],
