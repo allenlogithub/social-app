@@ -33,91 +33,96 @@ class _EmailAddressState extends State<EmailAddress> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20),
-                    Text("What's your\nemail\naddress?",
-                        style: GoogleFonts.lato(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 20),
-                    Container(
-                        width: 280,
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextField(
-                          controller: _emailController,
-                          autocorrect: true,
-                          decoration: const InputDecoration(
-                              hintText: 'Enter Email Here'),
-                        )),
-                    const SizedBox(height: 14),
-                    SizedBox(
-                      height: 60,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => Login(account: _emailController.text));
-                        },
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.amber),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    side: const BorderSide(
-                                        color: Colors.amber)))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.account_box_rounded,
-                                color: Colors.white),
-                            Text('   Login',
-                                style: GoogleFonts.lato(
-                                    fontSize: 20, color: Colors.white)),
-                          ],
+      body: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SafeArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      Text("What's your\nemail\naddress?",
+                          style: GoogleFonts.lato(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 20),
+                      Container(
+                          width: 280,
+                          padding: const EdgeInsets.all(10.0),
+                          child: TextField(
+                            controller: _emailController,
+                            autocorrect: true,
+                            decoration: const InputDecoration(
+                                hintText: 'Enter Email Here'),
+                          )),
+                      const SizedBox(height: 14),
+                      SizedBox(
+                        height: 60,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => Login(account: _emailController.text));
+                          },
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.amber),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      side: const BorderSide(
+                                          color: Colors.amber)))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.account_box_rounded,
+                                  color: Colors.white),
+                              Text('   Login',
+                                  style: GoogleFonts.lato(
+                                      fontSize: 20, color: Colors.white)),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      height: 60,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => SignUp(email: _emailController.text));
-                        },
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.amber),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    side: const BorderSide(
-                                        color: Colors.amber)))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.email, color: Colors.white),
-                            Text('   Sign Up with Email',
-                                style: GoogleFonts.lato(
-                                    fontSize: 20, color: Colors.white)),
-                          ],
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 60,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => SignUp(email: _emailController.text));
+                          },
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.amber),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      side: const BorderSide(
+                                          color: Colors.amber)))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.email, color: Colors.white),
+                              Text('   Sign Up with Email',
+                                  style: GoogleFonts.lato(
+                                      fontSize: 20, color: Colors.white)),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
