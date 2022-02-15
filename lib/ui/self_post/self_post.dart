@@ -54,6 +54,7 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
   void _resetTextField() {
     setState(() {
       _newSelfArticleContent.text = '';
+      _isPostButtonEnabled = false;
     });
   }
 

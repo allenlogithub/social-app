@@ -48,6 +48,7 @@ class _CommentTextInputState extends State<CommentTextInput> {
   void _resetTextField() {
     setState(() {
       cmtContent.text = '';
+      _isPostButtonEnabled = false;
     });
   }
 
