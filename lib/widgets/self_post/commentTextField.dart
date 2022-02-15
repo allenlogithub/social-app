@@ -45,6 +45,12 @@ class _CommentTextInputState extends State<CommentTextInput> {
     return _isPostButtonEnabled;
   }
 
+  void _resetTextField() {
+    setState(() {
+      cmtContent.text = '';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -91,6 +97,7 @@ class _CommentTextInputState extends State<CommentTextInput> {
                                   widget.index, value.message['items']);
                               widget.refresh(true);
                             });
+                            _resetTextField();
                           }
                         }
                       : null,

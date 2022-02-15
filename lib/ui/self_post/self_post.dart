@@ -51,6 +51,12 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
     return _isPostButtonEnabled;
   }
 
+  void _resetTextField() {
+    setState(() {
+      _newSelfArticleContent.text = '';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,6 +153,7 @@ class _SelfArticlePostState extends State<SelfArticlePost> {
                                                 getSelfArticleRequest();
                                           });
                                         });
+                                        _resetTextField();
                                       }
                                     }
                                   : null,
