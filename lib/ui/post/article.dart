@@ -54,41 +54,46 @@ class _ArticleState extends State<Article> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              art['content'],
-              style: GoogleFonts.lato(
-                color: Colors.white,
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
+      body: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            if (art['items'] != null) ...[
-              CommentShowing(article: art),
-              CommentTextInput(
-                articleId: art['articleId'],
-                index: widget.index,
-                notifyCommentsUpdated: widget.notifyCommentsUpdated,
-                refresh: refreshScreen,
+              Text(
+                art['content'],
+                style: GoogleFonts.lato(
+                  color: Colors.white,
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ] else ...[
-              CommentTextInput(
-                articleId: art['articleId'],
-                index: widget.index,
-                notifyCommentsUpdated: widget.notifyCommentsUpdated,
-                refresh: refreshScreen,
+              const SizedBox(
+                height: 10,
               ),
+              if (art['items'] != null) ...[
+                CommentShowing(article: art),
+                CommentTextInput(
+                  articleId: art['articleId'],
+                  index: widget.index,
+                  notifyCommentsUpdated: widget.notifyCommentsUpdated,
+                  refresh: refreshScreen,
+                ),
+              ] else ...[
+                CommentTextInput(
+                  articleId: art['articleId'],
+                  index: widget.index,
+                  notifyCommentsUpdated: widget.notifyCommentsUpdated,
+                  refresh: refreshScreen,
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
