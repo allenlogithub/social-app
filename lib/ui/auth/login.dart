@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:social_app/widgets/navigation/back.dart';
 import 'package:social_app/network/auth/login.dart';
-import 'package:social_app/ui/self_post/self_post.dart';
+import 'package:social_app/ui/tabbar/mainTabbar.dart';
 
 class Login extends StatefulWidget {
   final String account;
@@ -114,7 +114,7 @@ class _LoginState extends State<Login> {
                               widget.account, _passwordController.text);
                           result.then((value) {
                             if (value.err == "") {
-                              Get.to(() => SelfArticlePost());
+                              Get.to(() => const MainTabbar());
                             } else {
                               print("value.err: " + value.err.toString());
                               print(
