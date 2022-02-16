@@ -16,6 +16,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
+  late bool _passwordVisibility;
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisibility = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +84,27 @@ class _LoginState extends State<Login> {
                             color: Colors.white70,
                             fontSize: 10,
                             fontWeight: FontWeight.bold)),
-                    SizedBox(
-                        width: 280,
-                        child: TextField(
-                          controller: _passwordController,
-                          autocorrect: true,
-                          decoration:
-                              const InputDecoration(hintText: 'PASSWORD'),
-                        )),
+                    TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: _passwordController,
+                      obscureText: !_passwordVisibility,
+                      decoration: InputDecoration(
+                        hintText: 'PASSWORD',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _passwordVisibility
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey[400],
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisibility = !_passwordVisibility;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 20),
                     SizedBox(
                       height: 60,
