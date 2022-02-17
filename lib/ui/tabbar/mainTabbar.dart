@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:social_app/widgets/articles/getHomeArticles.dart';
 import 'package:social_app/widgets/self_post/articlePosting.dart';
+import 'package:social_app/ui/network/network.dart';
 
 class MainTabbar extends StatefulWidget {
   const MainTabbar({
@@ -43,6 +45,7 @@ class _MainTabbarState extends State<MainTabbar> {
         children: <Widget>[
           Home(),
           ArticlePosting(),
+          Network(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -50,6 +53,7 @@ class _MainTabbarState extends State<MainTabbar> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Post'),
+          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Network'),
         ],
         currentIndex: _bottomNavigationBarIndex,
         onTap: _bottomNavigationBarTapped,
