@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:social_app/widgets/network/myNetwork.dart';
 import 'package:social_app/network/connection/searchUser.dart';
+import 'package:social_app/ui/network/searchUserResultShowing.dart';
 
 class Network extends StatefulWidget {
   const Network({Key? key}) : super(key: key);
@@ -15,10 +16,9 @@ class _NetworkState extends State<Network> {
   final TextEditingController _searchController = TextEditingController();
   late Future<SearchUserResponse> futureSearchUserResponse;
 
-  void _searchUser(String s) {
-    if (s.length > 1) {
-      futureSearchUserResponse = searchUserRequest(s);
-    }
+  @override
+  void initState() {
+    super.initState();
     _searchController.text = '';
   }
 
@@ -52,7 +52,9 @@ class _NetworkState extends State<Network> {
                           icon: const Icon(Icons.search),
                           iconSize: 30,
                           onPressed: () {
-                            _searchUser(_searchController.text);
+                            Get.to(() => SearchUserResultShowing(
+                                  searchString: _searchController.text,
+                                ));
                           },
                         ),
                         Expanded(
@@ -68,7 +70,9 @@ class _NetworkState extends State<Network> {
                             ),
                             onSubmitted: (value) {
                               // same action as IconButton
-                              _searchUser(value);
+                              Get.to(() => SearchUserResultShowing(
+                                    searchString: value,
+                                  ));
                             },
                           ),
                         ),
@@ -81,7 +85,6 @@ class _NetworkState extends State<Network> {
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
-                      print("Tapped on My Network");
                       Get.to(() => MyNetwork());
                     },
                     child: Row(
