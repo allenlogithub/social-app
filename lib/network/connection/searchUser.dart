@@ -34,7 +34,6 @@ Future<SearchUserResponse> searchUserRequest(String userString) async {
     final jsonData = response.data;
     SearchUserResponse searchUserResponse =
         SearchUserResponse.fromJson(Map<String, dynamic>.from(jsonData));
-    print(searchUserResponse.message);
     return searchUserResponse;
   } catch (e) {
     if (e is DioError) {
