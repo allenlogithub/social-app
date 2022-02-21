@@ -140,6 +140,7 @@ class _SearchUserResultShowingState extends State<SearchUserResultShowing> {
                                                   _sendInvitationIconButtonColor[
                                                       index] = Colors.grey;
                                                 });
+                                                isSendInvitationSuccess = false;
                                               }
                                             },
                                             iconSize: 40,
