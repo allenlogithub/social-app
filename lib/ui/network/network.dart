@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:social_app/widgets/network/myNetwork.dart';
 import 'package:social_app/network/connection/searchUser.dart';
 import 'package:social_app/ui/network/searchUserResultShowing.dart';
+import 'package:social_app/widgets/network/invitations.dart';
 
 class Network extends StatefulWidget {
   const Network({Key? key}) : super(key: key);
@@ -117,7 +118,7 @@ class _NetworkState extends State<Network> {
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
-                      print("Tapped Invitations");
+                      Get.to(() => Invitations());
                     },
                     child: Row(
                       children: const <Widget>[
