@@ -20,11 +20,18 @@ class SearchUserResultShowing extends StatefulWidget {
 class _SearchUserResultShowingState extends State<SearchUserResultShowing> {
   late Future<SearchUserResponse> futureSearchUserResponse;
   late Future<SendFriendRequestResponse> futureSendFriendRequestResponse;
+  bool isSendInvitationSuccess = false;
+  List<Color> _sendInvitationIconButtonColor = [];
 
   @override
   void initState() {
     super.initState();
     futureSearchUserResponse = searchUserRequest(widget.searchString);
+    futureSearchUserResponse.then((value) {
+      List<dynamic> data = value.message ?? [];
+      _sendInvitationIconButtonColor =
+          List<Color>.filled(data.length, Colors.blue);
+    });
   }
 
   Future<void> _pullRefresh() async {
@@ -40,13 +47,15 @@ class _SearchUserResultShowingState extends State<SearchUserResultShowing> {
     print(userId);
   }
 
-  void _sendInvitation(int userId) {
-    sendFriendRequest(userId).then((value) {
-      if (value.err == '') {
-        print("accepted!");
+  Future<void> _sendInvitation(int userId) async {
+    // FUTURE:
+    //   need to disable the button, not just change the button color
+    await sendFriendRequest(userId).then((value) {
+      if (value.err.isEmpty) {
+        isSendInvitationSuccess = true;
+      } else {
+        isSendInvitationSuccess = false;
       }
-      print("value.err:");
-      print(value.err);
     });
   }
 
@@ -116,18 +125,27 @@ class _SearchUserResultShowingState extends State<SearchUserResultShowing> {
                                                 user['userId'],
                                               );
                                             },
+                                            color: Colors.grey,
                                             iconSize: 40,
                                             icon:
                                                 const Icon(Icons.manage_search),
                                           ),
                                           IconButton(
-                                            onPressed: () {
-                                              _sendInvitation(
+                                            onPressed: () async {
+                                              await _sendInvitation(
                                                 user['userId'],
                                               );
+                                              if (isSendInvitationSuccess) {
+                                                setState(() {
+                                                  _sendInvitationIconButtonColor[
+                                                      index] = Colors.grey;
+                                                });
+                                              }
                                             },
                                             iconSize: 40,
-                                            color: Colors.blue,
+                                            color:
+                                                _sendInvitationIconButtonColor[
+                                                    index],
                                             icon: const Icon(
                                                 Icons.person_add_alt_1),
                                           ),
