@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:social_app/network/connection/getFriendRequestList.dart';
 import 'package:social_app/widgets/navigation/back.dart';
 import 'package:social_app/network/connection/acceptFriendRequest.dart';
+import 'package:social_app/network/connection/rejectFriendRequest.dart';
 
 class Invitations extends StatefulWidget {
   const Invitations({Key? key}) : super(key: key);
@@ -105,12 +106,16 @@ class _InvitationsState extends State<Invitations> {
                               const Spacer(),
                               IconButton(
                                 onPressed: () {
-                                  setState(() {
-                                    // not functioning, need rejectInvitation API
-                                    _rejectInvitationIconButtonColor[index] =
-                                        Colors.grey;
-                                    _acceptInvitationIconButtonColor[index] =
-                                        Colors.grey;
+                                  rejectFriendRequest(request['userId'])
+                                      .then((value) {
+                                    if (value.err == '') {
+                                      setState(() {
+                                        _rejectInvitationIconButtonColor[
+                                            index] = Colors.grey;
+                                        _acceptInvitationIconButtonColor[
+                                            index] = Colors.grey;
+                                      });
+                                    }
                                   });
                                 },
                                 iconSize: 40,
