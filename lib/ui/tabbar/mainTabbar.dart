@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:social_app/widgets/articles/getHomeArticles.dart';
 import 'package:social_app/widgets/self_post/articlePosting.dart';
 import 'package:social_app/ui/network/network.dart';
+import 'package:social_app/widgets/auth/logout.dart';
 
 class MainTabbar extends StatefulWidget {
   const MainTabbar({
@@ -37,6 +38,8 @@ class _MainTabbarState extends State<MainTabbar> {
               width: 40,
               child: Icon(Icons.list_rounded),
             ),
+            Spacer(),
+            LogoutButton(),
           ],
         ),
       ),
