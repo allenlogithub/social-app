@@ -19,20 +19,20 @@ class _EmailAddressState extends State<EmailAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            SizedBox(
-              height: 40,
-              width: 40,
-              child: NavigationBack(),
-            ),
-          ],
-        ),
-      ),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     children: const <Widget>[
+      //       SizedBox(
+      //         height: 40,
+      //         width: 40,
+      //         child: NavigationBack(),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
@@ -46,7 +46,7 @@ class _EmailAddressState extends State<EmailAddress> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 60),
                       Text("What's your\nemail\naddress?",
                           style: GoogleFonts.lato(
                               color: Colors.white,
