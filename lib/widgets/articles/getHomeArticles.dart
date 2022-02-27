@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
 import 'package:social_app/network/article/get_self_article_post.dart';
+import 'package:social_app/network/article/delete_self_article.dart';
 import 'package:social_app/ui/post/article.dart';
 
 class Home extends StatefulWidget {
@@ -14,6 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late Future<GetSelfArticleResponse> futureGetSelfArticleResponse;
+  late Future<DelSelfArticleResponse> futureDelSelfArticleResponse;
 
   @override
   void initState() {
@@ -32,6 +34,20 @@ class _HomeState extends State<Home> {
   Future<void> _pullRefresh() async {
     setState(() {
       futureGetSelfArticleResponse = getSelfArticleRequest();
+    });
+  }
+
+  // Future<void> _removeArticle(int articleId, int index) async {
+  void _removeArticle(int articleId, int index) async {
+    futureDelSelfArticleResponse = delSelfArticleRequest(articleId);
+    futureDelSelfArticleResponse.then((value) {
+      if (value.err == '') {
+        setState(() {
+          futureGetSelfArticleResponse.then((value) {
+            value.message.removeAt(index);
+          });
+        });
+      }
     });
   }
 
@@ -65,6 +81,32 @@ class _HomeState extends State<Home> {
                           ),
                           child: Column(
                             children: <Widget>[
+                              SizedBox(
+                                height: 20,
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      'from: Self',
+                                      style: GoogleFonts.lato(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    IconButton(
+                                        onPressed: () => _removeArticle(
+                                            art['articleId'], index),
+                                        icon: const Icon(Icons.remove))
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                              ),
                               Text(
                                 art['content'],
                                 maxLines: 8,
