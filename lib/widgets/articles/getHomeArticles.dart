@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
+      padding: const EdgeInsets.all(8.0),
       child: FutureBuilder<GetSelfArticleResponse>(
           future: futureGetSelfArticleResponse,
           builder: (context, snapshot) {
@@ -55,57 +55,74 @@ class _HomeState extends State<Home> {
                     final art = arts[index];
                     return Column(
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            const SizedBox(
-                              width: 10,
+                        Container(
+                          padding: const EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.orangeAccent.shade100,
                             ),
-                            Text(
-                              art['content'],
-                              maxLines: 8,
-                              style: GoogleFonts.lato(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Spacer(),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Get.to(() => Article(
-                                        notifyCommentsUpdated: updateComments,
-                                        article: art,
-                                        index: index,
-                                      ));
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          const Color(0xFF827717)),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50.0),
-                                      side: const BorderSide(
-                                        color: Color(0xFF827717),
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                  ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                art['content'],
+                                maxLines: 8,
+                                style: GoogleFonts.lato(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Divider(
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                height: 25,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'View',
-                                      style: GoogleFonts.lato(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    IconButton(
+                                      onPressed: () {
+                                        print("no func yet.");
+                                      }, //_toArticle(art, index),
+                                      icon: const Icon(Icons.crop_square_sharp),
+                                      iconSize: 20,
+                                      color: Colors.grey,
+                                      padding: const EdgeInsets.all(3.0),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        Get.to(() => Article(
+                                              notifyCommentsUpdated:
+                                                  updateComments,
+                                              article: art,
+                                              index: index,
+                                            ));
+                                      },
+                                      icon: const Icon(Icons.comment_outlined),
+                                      iconSize: 20,
+                                      color: Colors.grey,
+                                      padding: const EdgeInsets.all(3.0),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        print("no func yet.");
+                                      }, //_toArticle(art, index),
+                                      icon: const Icon(Icons.crop_square_sharp),
+                                      iconSize: 20,
+                                      color: Colors.grey,
+                                      padding: const EdgeInsets.all(3.0),
                                     ),
                                   ],
-                                )),
-                          ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
